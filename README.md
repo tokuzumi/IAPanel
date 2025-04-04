@@ -9,6 +9,19 @@ IA Panel é uma aplicação web moderna para interações de chat com IA, constr
 - **Sidebar Expansível**: Menu de navegação que pode ser recolhido para maximizar o espaço de trabalho
 - **Painel Stage Dinâmico**: Área lateral para exibir informações contextuais relacionadas às opções do menu
 - **Transições Suaves**: Animações fluidas entre os diferentes estados da interface
+- **Padding Dinâmico**: Sistema avançado de padding que se adapta a cada combinação de estados dos painéis
+
+## Layout Aprimorado
+
+O projeto implementa uma solução sofisticada de layout dinâmico que:
+
+- Ajusta automaticamente o padding do Chat com base nos estados do Sidebar e Stage
+- Utiliza unidades relativas (percentagens) para garantir consistência em diferentes dispositivos
+- Implementa transições suaves (300ms) entre todos os estados
+- Garante que os componentes interajam de forma harmoniosa
+- Preserva a funcionalidade de edição de título no Chat
+
+Para mais detalhes sobre a implementação do layout, consulte a [documentação detalhada](/docs/LAYOUT_FINAL.md).
 
 ## Tecnologias Utilizadas
 
@@ -57,7 +70,7 @@ Siga estas etapas para configurar o projeto localmente:
    npm install
    ```
 
-3. Crie um arquivo `.env.local` e configure as variáveis de ambiente necessárias:
+3. Crie um arquivo `.env.local` baseado no `.env.example` e configure as variáveis de ambiente necessárias:
    ```
    NEXTAUTH_SECRET=seu_segredo_aqui
    NEXTAUTH_URL=http://localhost:3000
@@ -81,6 +94,7 @@ Para informações mais detalhadas sobre a implementação e arquitetura, consul
 - [DESENVOLVIMENTO.md](/docs/DESENVOLVIMENTO.md) - Visão geral da estrutura e componentes
 - [PADDING_CHALLENGE.md](/docs/PADDING_CHALLENGE.md) - Explicação da solução de padding responsivo
 - [LAYOUT_ISSUES.md](/docs/LAYOUT_ISSUES.md) - Detalhes sobre os desafios de layout enfrentados
+- [LAYOUT_FINAL.md](/docs/LAYOUT_FINAL.md) - Documentação da solução final de layout
 
 ## Contribuição
 
