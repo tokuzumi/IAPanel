@@ -10,6 +10,7 @@ IA Panel é uma aplicação web moderna para interações de chat com IA, constr
 - **Painel Stage Dinâmico**: Área lateral para exibir informações contextuais relacionadas às opções do menu
 - **Transições Suaves**: Animações fluidas entre os diferentes estados da interface
 - **Padding Dinâmico**: Sistema avançado de padding que se adapta a cada combinação de estados dos painéis
+- **Processamento Robusto de Webhooks**: Sistema inteligente que detecta automaticamente diferentes formatos de resposta
 
 ## Layout Aprimorado
 
@@ -22,6 +23,17 @@ O projeto implementa uma solução sofisticada de layout dinâmico que:
 - Preserva a funcionalidade de edição de título no Chat
 
 Para mais detalhes sobre a implementação do layout, consulte a [documentação detalhada](/docs/LAYOUT_FINAL.md).
+
+## Integração com Webhook
+
+O sistema implementa uma conexão robusta com webhooks externos para processamento de mensagens, com:
+
+- Detecção automática de múltiplos formatos de resposta
+- Processamento inteligente de mensagens e funções
+- Busca recursiva por objetos de mensagem válidos
+- Tratamento abrangente de erros em todos os níveis
+
+Para detalhes técnicos completos sobre o processamento de respostas do webhook, consulte a [documentação específica](/docs/WEBHOOK_PROCESSING.md).
 
 ## Tecnologias Utilizadas
 
@@ -43,7 +55,8 @@ src/
 │   ├── sidebar/              # Barra lateral de navegação
 │   └── stage/                # Painel lateral direito
 ├── lib/                      # Utilitários e helpers
-│   └── auth/                 # Configuração de autenticação
+│   ├── auth/                 # Configuração de autenticação
+│   └── api.ts                # Serviços de API e webhook
 ├── store/                    # Gerenciamento de estado global
 │   ├── chat.ts               # Estado do chat
 │   ├── sidebar.ts            # Estado da sidebar
@@ -91,10 +104,11 @@ Siga estas etapas para configurar o projeto localmente:
 
 Para informações mais detalhadas sobre a implementação e arquitetura, consulte os arquivos na pasta `/docs`:
 
+- [DOCUMENTACAO_CENTRAL.md](/docs/DOCUMENTACAO_CENTRAL.md) - Documentação principal do projeto
+- [WEBHOOK_PROCESSING.md](/docs/WEBHOOK_PROCESSING.md) - Detalhes sobre processamento de respostas do webhook
+- [LAYOUT_FINAL.md](/docs/LAYOUT_FINAL.md) - Documentação da solução final de layout
 - [DESENVOLVIMENTO.md](/docs/DESENVOLVIMENTO.md) - Visão geral da estrutura e componentes
 - [PADDING_CHALLENGE.md](/docs/PADDING_CHALLENGE.md) - Explicação da solução de padding responsivo
-- [LAYOUT_ISSUES.md](/docs/LAYOUT_ISSUES.md) - Detalhes sobre os desafios de layout enfrentados
-- [LAYOUT_FINAL.md](/docs/LAYOUT_FINAL.md) - Documentação da solução final de layout
 
 ## Contribuição
 
