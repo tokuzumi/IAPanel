@@ -7,26 +7,22 @@ import { Send, Pencil } from 'lucide-react'
 import { useState, FormEvent } from 'react'
 
 export function Chat() {
-  const { messages, isLoading, title, addMessage, setTitle } = useChatStore()
+  const { messages, isLoading, title, addMessage, sendMessage, setTitle } = useChatStore()
   const { isExpanded: isStageExpanded } = useStageStore()
   const { isExpanded: isSidebarExpanded } = useSidebarStore()
   const [input, setInput] = useState('')
   const [isEditingTitle, setIsEditingTitle] = useState(false)
   const [titleInput, setTitleInput] = useState(title)
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if (!input.trim()) return
-
-    const message: Message = {
-      id: Date.now().toString(),
-      content: input,
-      role: 'user',
-      createdAt: new Date(),
-    }
-
-    addMessage(message)
+    if (!input.trim() || isLoading) return
+    
+    const trimmedInput = input.trim()
     setInput('')
+    
+    // Envia a mensagem para o webhook
+    await sendMessage(trimmedInput)
   }
 
   const handleTitleSubmit = (e: FormEvent) => {
@@ -93,46 +89,44 @@ export function Chat() {
       </div>
 
       {/* Chat content */}
-      <div className="flex-1 overflow-y-auto p-4">
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {messages.map((message: Message) => (
+      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        {messages.map((message: Message) => (
+          <div
+            key={message.id}
+            className={`flex ${
+              message.role === 'user' ? 'justify-end' : 'justify-start'
+            }`}
+          >
             <div
-              key={message.id}
-              className={`flex ${
-                message.role === 'user' ? 'justify-end' : 'justify-start'
+              className={`max-w-[80%] rounded-lg p-3 ${
+                message.role === 'user'
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-muted'
               }`}
             >
-              <div
-                className={`max-w-[80%] rounded-lg p-3 ${
-                  message.role === 'user'
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted'
-                }`}
-              >
-                {message.content}
-              </div>
+              {message.content}
             </div>
-          ))}
-          {isLoading && (
-            <div className="flex justify-start">
-              <div className="max-w-[80%] rounded-lg p-3 bg-muted animate-pulse">
-                Digitando...
-              </div>
+          </div>
+        ))}
+        {isLoading && (
+          <div className="flex justify-start">
+            <div className="max-w-[80%] rounded-lg p-3 bg-muted animate-pulse">
+              Digitando...
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
 
       {/* Input */}
       <div className="p-4 border-t">
-        <div className="flex items-center gap-2">
+        <form onSubmit={handleSubmit} className="flex items-center gap-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Digite sua mensagem..."
             className="flex-1 p-2 rounded-md bg-secondary"
+            disabled={isLoading}
           />
           <button
             type="submit"
@@ -141,7 +135,7 @@ export function Chat() {
           >
             <Send className="w-5 h-5" />
           </button>
-        </div>
+        </form>
       </div>
     </main>
   )

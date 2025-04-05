@@ -1,22 +1,16 @@
 import { create } from 'zustand'
-
-interface StageContent {
-  id: string
-  type: string
-  title: string
-  content: any
-}
+import { StageContent } from '@/types'
 
 interface StageStore {
   isExpanded: boolean
-  selectedContent: StageContent | null
+  content: StageContent | null
   setExpanded: (isExpanded: boolean) => void
   setContent: (content: StageContent | null) => void
 }
 
 export const useStageStore = create<StageStore>((set) => ({
   isExpanded: false,
-  selectedContent: null,
+  content: null,
   setExpanded: (isExpanded) => set({ isExpanded }),
-  setContent: (content) => set({ selectedContent: content }),
+  setContent: (content) => set({ content }),
 })) 
